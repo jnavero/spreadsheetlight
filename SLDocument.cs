@@ -3020,7 +3020,7 @@ namespace SpreadsheetLight
 
                 if (slwb.WorkbookProperties.HasWorkbookProperties)
                 {
-                    wbp.Workbook.WorkbookProperties = slwb.WorkbookProperties.ToWorkbookProperties();
+                    slwb.WorkbookProperties.ToWorkbookProperties(wbp.Workbook.WorkbookProperties);
                 }
                 else
                 {
@@ -3257,6 +3257,7 @@ namespace SpreadsheetLight
             {
                 xw.WriteStartDocument(true);
                 xw.WriteStartElement("cp", "coreProperties", "http://schemas.openxmlformats.org/package/2006/metadata/core-properties");
+                
                 xw.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
                 xw.WriteAttributeString("xmlns", "dcmitype", null, "http://purl.org/dc/dcmitype/");
                 xw.WriteAttributeString("xmlns", "dcterms", null, "http://purl.org/dc/terms/");
@@ -3270,14 +3271,6 @@ namespace SpreadsheetLight
                 if (this.DocumentProperties.ContentStatus.Length > 0)
                 {
                     xw.WriteElementString("cp", "contentStatus", null, this.DocumentProperties.ContentStatus);
-                }
-
-                if (this.DocumentProperties.Created.Length > 0)
-                {
-                    xw.WriteStartElement("dcterms", "created", null);
-                    xw.WriteAttributeString("xsi", "type", null, "dcterms:W3CDTF");
-                    xw.WriteString(this.DocumentProperties.Created);
-                    xw.WriteEndElement();
                 }
 
                 if (this.DocumentProperties.Creator.Length > 0)
@@ -3308,6 +3301,14 @@ namespace SpreadsheetLight
                 if (this.DocumentProperties.LastModifiedBy.Length > 0)
                 {
                     xw.WriteElementString("cp", "lastModifiedBy", null, this.DocumentProperties.LastModifiedBy);
+                }
+
+                if (this.DocumentProperties.Created.Length > 0)
+                {
+                    xw.WriteStartElement("dcterms", "created", null);
+                    xw.WriteAttributeString("xsi", "type", null, "dcterms:W3CDTF");
+                    xw.WriteString(this.DocumentProperties.Created);
+                    xw.WriteEndElement();
                 }
 
                 if (this.DocumentProperties.LastPrinted.Length > 0)

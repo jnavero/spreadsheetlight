@@ -204,9 +204,9 @@ namespace SpreadsheetLight
             if (wp.DefaultThemeVersion != null) this.DefaultThemeVersion = wp.DefaultThemeVersion.Value;
         }
 
-        internal WorkbookProperties ToWorkbookProperties()
+        internal void ToWorkbookProperties(WorkbookProperties wp)
         {
-            WorkbookProperties wp = new WorkbookProperties();
+            if (this.iDefaultThemeVersion != null) wp.DefaultThemeVersion = this.iDefaultThemeVersion.Value;
             if (this.bDate1904 != null) wp.Date1904 = this.bDate1904.Value;
             if (this.bDateCompatibility != null) wp.DateCompatibility = this.bDateCompatibility.Value;
             if (this.vShowObjects != null) wp.ShowObjects = this.vShowObjects.Value;
@@ -225,7 +225,30 @@ namespace SpreadsheetLight
             if (this.bCheckCompatibility != null) wp.CheckCompatibility = this.bCheckCompatibility.Value;
             if (this.bAutoCompressPictures != null) wp.AutoCompressPictures = this.bAutoCompressPictures.Value;
             if (this.bRefreshAllConnections != null) wp.RefreshAllConnections = this.bRefreshAllConnections.Value;
+        }
+
+        internal WorkbookProperties ToWorkbookProperties()
+        {
+            WorkbookProperties wp = new WorkbookProperties();
             if (this.iDefaultThemeVersion != null) wp.DefaultThemeVersion = this.iDefaultThemeVersion.Value;
+            if (this.bDate1904 != null) wp.Date1904 = this.bDate1904.Value;
+            if (this.bDateCompatibility != null) wp.DateCompatibility = this.bDateCompatibility.Value;
+            if (this.vShowObjects != null) wp.ShowObjects = this.vShowObjects.Value;
+            if (this.bShowBorderUnselectedTables != null) wp.ShowBorderUnselectedTables = this.bShowBorderUnselectedTables.Value;
+            if (this.bFilterPrivacy != null) wp.FilterPrivacy = this.bFilterPrivacy.Value;
+            if (this.bPromptedSolutions != null) wp.PromptedSolutions = this.bPromptedSolutions.Value;
+            if (this.bShowInkAnnotation != null) wp.ShowInkAnnotation = this.bShowInkAnnotation.Value;
+            if (this.bBackupFile != null) wp.BackupFile = this.bBackupFile.Value;
+            if (this.bSaveExternalLinkValues != null) wp.SaveExternalLinkValues = this.bSaveExternalLinkValues.Value;
+            if (this.vUpdateLinks != null) wp.UpdateLinks = this.vUpdateLinks.Value;
+            if (this.sCodeName != null) wp.CodeName = this.sCodeName;
+            if (this.bHidePivotFieldList != null) wp.HidePivotFieldList = this.bHidePivotFieldList.Value;
+            if (this.bShowPivotChartFilter != null) wp.ShowPivotChartFilter = this.bShowPivotChartFilter.Value;
+            if (this.bAllowRefreshQuery != null) wp.AllowRefreshQuery = this.bAllowRefreshQuery.Value;
+            if (this.bPublishItems != null) wp.PublishItems = this.bPublishItems.Value;
+            if (this.bCheckCompatibility != null) wp.CheckCompatibility = this.bCheckCompatibility.Value;
+            if (this.bAutoCompressPictures != null) wp.AutoCompressPictures = this.bAutoCompressPictures.Value;
+            if (this.bRefreshAllConnections != null) wp.RefreshAllConnections = this.bRefreshAllConnections.Value;
 
             return wp;
         }
