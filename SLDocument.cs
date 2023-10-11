@@ -3788,5 +3788,39 @@ namespace SpreadsheetLight
             xl.Dispose();
             memstream.Dispose();
         }
+
+
+        /// <summary>
+        /// Ignored Error Number Stored as Text
+        /// </summary>
+        /// <param name="StartRowIndex">The row index of the start cell of the cell range. This is typically the top-left cell.</param>
+        /// <param name="StartColumnIndex">The column index of the start cell of the cell range. This is typically the top-left cell.</param>
+        /// <param name="EndRowIndex">The row index of the end cell of the cell range. This is typically the bottom-right cell.</param>
+        /// <param name="EndColumnIndex">The column index of the end cell of the cell range. This is typically the bottom-right cell.</param>
+        public void IgnoredErrors(int StartRowIndex, int StartColumnIndex, int EndRowIndex, int EndColumnIndex)
+        {
+            WorksheetPart wsp = (WorksheetPart)wbp.GetPartById(gsSelectedWorksheetRelationshipID);
+            var errorsParts = wsp.Worksheet.FirstOrDefault(x => x.GetType().IsAssignableFrom(typeof(IgnoredErrors)));
+
+            var range = SLConvert.ToCellRange(StartRowIndex, StartColumnIndex, EndRowIndex, EndColumnIndex);  
+
+            if (errorsParts == null)
+            {
+                IgnoredErrors ignoredErrors = new IgnoredErrors();
+
+                IgnoredError ignoredError = new IgnoredError() { SequenceOfReferences = new ListValue<StringValue>() { InnerText = range }, NumberStoredAsText = true };
+
+                ignoredErrors.Append(ignoredError);
+                wsp.Worksheet.Append(ignoredErrors);
+            }
+            else
+            {
+                var ignoredError = (IgnoredError)errorsParts.FirstOrDefault();
+                ignoredError.SequenceOfReferences.InnerText = range;
+                ignoredError.NumberStoredAsText = true;
+            }
+        }
+
+
     }
 }
