@@ -41,7 +41,7 @@ namespace SpreadsheetLight
                 if (this.Val.StartsWith("=")) cfvo.Val = this.Val.Substring(1);
                 else cfvo.Val = this.Val;
             }
-            
+
             if (!this.GreaterThanOrEqual) cfvo.GreaterThanOrEqual = false;
 
             return cfvo;
@@ -52,26 +52,29 @@ namespace SpreadsheetLight
             SLConditionalFormattingValueObject2010 cfvo2010 = new SLConditionalFormattingValueObject2010();
             cfvo2010.Formula = this.Val;
 
-            switch (this.Type)
+            if (this.Type == ConditionalFormatValueObjectValues.Formula)
             {
-                case ConditionalFormatValueObjectValues.Formula:
-                    cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Formula;
-                    break;
-                case ConditionalFormatValueObjectValues.Max:
-                    cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Max;
-                    break;
-                case ConditionalFormatValueObjectValues.Min:
-                    cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Min;
-                    break;
-                case ConditionalFormatValueObjectValues.Number:
-                    cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Numeric;
-                    break;
-                case ConditionalFormatValueObjectValues.Percent:
-                    cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Percent;
-                    break;
-                case ConditionalFormatValueObjectValues.Percentile:
-                    cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Percentile;
-                    break;
+                cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Formula;
+            }
+            else if (this.Type == ConditionalFormatValueObjectValues.Max)
+            {
+                cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Max;
+            }
+            else if (this.Type == ConditionalFormatValueObjectValues.Min)
+            {
+                cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Min;
+            }
+            else if (this.Type == ConditionalFormatValueObjectValues.Number)
+            {
+                cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Numeric;
+            }
+            else if (this.Type == ConditionalFormatValueObjectValues.Percent)
+            {
+                cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Percent;
+            }
+            else if (this.Type == ConditionalFormatValueObjectValues.Percentile)
+            {
+                cfvo2010.Type = X14.ConditionalFormattingValueObjectTypeValues.Percentile;
             }
 
             cfvo2010.GreaterThanOrEqual = this.GreaterThanOrEqual;

@@ -295,54 +295,61 @@ namespace SpreadsheetLight
 
             if (this.HasHorizontal)
             {
-                switch (this.Horizontal)
+                if (this.Horizontal == HorizontalAlignmentValues.Center)
                 {
-                    case HorizontalAlignmentValues.Center:
-                        sb.Append(" horizontal=\"center\"");
-                        break;
-                    case HorizontalAlignmentValues.CenterContinuous:
-                        sb.Append(" horizontal=\"centerContinuous\"");
-                        break;
-                    case HorizontalAlignmentValues.Distributed:
-                        sb.Append(" horizontal=\"distributed\"");
-                        break;
-                    case HorizontalAlignmentValues.Fill:
-                        sb.Append(" horizontal=\"fill\"");
-                        break;
-                    case HorizontalAlignmentValues.General:
-                        sb.Append(" horizontal=\"general\"");
-                        break;
-                    case HorizontalAlignmentValues.Justify:
-                        sb.Append(" horizontal=\"justify\"");
-                        break;
-                    case HorizontalAlignmentValues.Left:
-                        sb.Append(" horizontal=\"left\"");
-                        break;
-                    case HorizontalAlignmentValues.Right:
-                        sb.Append(" horizontal=\"right\"");
-                        break;
+                    sb.Append(" horizontal=\"center\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.CenterContinuous)
+                {
+                    sb.Append(" horizontal=\"centerContinuous\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.Distributed)
+                {
+                    sb.Append(" horizontal=\"distributed\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.Fill)
+                {
+                    sb.Append(" horizontal=\"fill\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.General)
+                {
+                    sb.Append(" horizontal=\"general\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.Justify)
+                {
+                    sb.Append(" horizontal=\"justify\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.Left)
+                {
+                    sb.Append(" horizontal=\"left\"");
+                }
+                else if (this.Horizontal == HorizontalAlignmentValues.Right)
+                {
+                    sb.Append(" horizontal=\"right\"");
                 }
             }
 
             if (this.HasVertical)
             {
-                switch (this.Vertical)
+                if (this.Vertical == VerticalAlignmentValues.Bottom)
                 {
-                    case VerticalAlignmentValues.Bottom:
-                        sb.Append(" vertical=\"bottom\"");
-                        break;
-                    case VerticalAlignmentValues.Center:
-                        sb.Append(" vertical=\"center\"");
-                        break;
-                    case VerticalAlignmentValues.Distributed:
-                        sb.Append(" vertical=\"distributed\"");
-                        break;
-                    case VerticalAlignmentValues.Justify:
-                        sb.Append(" vertical=\"justify\"");
-                        break;
-                    case VerticalAlignmentValues.Top:
-                        sb.Append(" vertical=\"top\"");
-                        break;
+                    sb.Append(" vertical=\"bottom\"");
+                }
+                else if (this.Vertical == VerticalAlignmentValues.Center)
+                {
+                    sb.Append(" vertical=\"center\"");
+                }
+                else if (this.Vertical == VerticalAlignmentValues.Distributed)
+                {
+                    sb.Append(" vertical=\"distributed\"");
+                }
+                else if (this.Vertical == VerticalAlignmentValues.Justify)
+                {
+                    sb.Append(" vertical=\"justify\"");
+                }
+                else if (this.Vertical == VerticalAlignmentValues.Top)
+                {
+                    sb.Append(" vertical=\"top\"");
                 }
             }
 

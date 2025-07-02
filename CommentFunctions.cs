@@ -365,7 +365,7 @@ namespace SpreadsheetLight
                             comm.Fill.PatternForegroundColor.DisplayColor.G.ToString("x2"),
                             comm.Fill.PatternForegroundColor.DisplayColor.B.ToString("x2"));
                     }
-                    
+
                     if (comm.LineColor != null)
                     {
                         sbVml.AppendFormat(" strokecolor=\"#{0}{1}{2}\"",
@@ -489,39 +489,40 @@ namespace SpreadsheetLight
                         }
                         else
                         {
-                            switch (comm.Fill.GradientColor.PathType)
+
+                            if (comm.Fill.GradientColor.PathType == A.PathShadeValues.Shape)
                             {
-                                case A.PathShadeValues.Shape:
-                                    sbVml.Append(" focusposition=\"50%,50%\" focus=\"100%\" type=\"gradientradial\"");
-                                    break;
-                                case A.PathShadeValues.Rectangle:
-                                case A.PathShadeValues.Circle:
-                                    // because there's no way to do a circular gradient with VML...
-                                    switch (comm.Fill.GradientColor.Direction)
-                                    {
-                                        case SLA.SLGradientDirectionValues.Center:
-                                            sbVml.Append(" focusposition=\"50%,50%\"");
-                                            break;
-                                        case SLA.SLGradientDirectionValues.CenterToBottomLeftCorner:
-                                            // so the "centre" is at the top-right
-                                            sbVml.Append(" focusposition=\"100%,0%\"");
-                                            break;
-                                        case SLA.SLGradientDirectionValues.CenterToBottomRightCorner:
-                                            // so the "centre" is at the top-left
-                                            sbVml.Append(" focusposition=\"0%,0%\"");
-                                            break;
-                                        case SLA.SLGradientDirectionValues.CenterToTopLeftCorner:
-                                            // so the "centre" is at the bottom-right
-                                            sbVml.Append(" focusposition=\"100%,100%\"");
-                                            break;
-                                        case SLA.SLGradientDirectionValues.CenterToTopRightCorner:
-                                            // so the "centre" is at the bottom-left
-                                            sbVml.Append(" focusposition=\"0%,100%\"");
-                                            break;
-                                    }
-                                    sbVml.Append(" focus=\"100%\" type=\"gradientradial\"");
-                                    break;
+                                sbVml.Append(" focusposition=\"50%,50%\" focus=\"100%\" type=\"gradientradial\"");
                             }
+                            if (comm.Fill.GradientColor.PathType == A.PathShadeValues.Rectangle ||
+                                comm.Fill.GradientColor.PathType == A.PathShadeValues.Circle)
+                            {
+                                // because there's no way to do a circular gradient with VML...
+                                switch (comm.Fill.GradientColor.Direction)
+                                {
+                                    case SLA.SLGradientDirectionValues.Center:
+                                        sbVml.Append(" focusposition=\"50%,50%\"");
+                                        break;
+                                    case SLA.SLGradientDirectionValues.CenterToBottomLeftCorner:
+                                        // so the "centre" is at the top-right
+                                        sbVml.Append(" focusposition=\"100%,0%\"");
+                                        break;
+                                    case SLA.SLGradientDirectionValues.CenterToBottomRightCorner:
+                                        // so the "centre" is at the top-left
+                                        sbVml.Append(" focusposition=\"0%,0%\"");
+                                        break;
+                                    case SLA.SLGradientDirectionValues.CenterToTopLeftCorner:
+                                        // so the "centre" is at the bottom-right
+                                        sbVml.Append(" focusposition=\"100%,100%\"");
+                                        break;
+                                    case SLA.SLGradientDirectionValues.CenterToTopRightCorner:
+                                        // so the "centre" is at the bottom-left
+                                        sbVml.Append(" focusposition=\"0%,100%\"");
+                                        break;
+                                }
+                                sbVml.Append(" focus=\"100%\" type=\"gradientradial\"");
+                            }
+
                         }
                     }
                     else if (comm.Fill.Type == SLA.SLFillType.BlipFill)
@@ -559,7 +560,7 @@ namespace SpreadsheetLight
                                 dictImageData[sImageData] = sRelId;
                             }
                         }
-                        
+
                         sbVml.AppendFormat(" o:relid=\"{0}\"", comm.Fill.BlipRelationshipID);
 
                         // all this to get from "myawesomepicture.jpg" to "myawesomepicture"
@@ -610,7 +611,7 @@ namespace SpreadsheetLight
                             fFrac = 100.0 - (double)comm.Fill.BlipLeftOffset - (double)comm.Fill.BlipRightOffset;
                             sbVml.AppendFormat(" size=\"{0}%,", fFrac.ToString("0.##", CultureInfo.InvariantCulture));
                             fFrac = 100.0 - (double)comm.Fill.BlipTopOffset - (double)comm.Fill.BlipBottomOffset;
-                            sbVml.AppendFormat("{0}%\"", fFrac.ToString("0.##",CultureInfo.InvariantCulture));
+                            sbVml.AppendFormat("{0}%\"", fFrac.ToString("0.##", CultureInfo.InvariantCulture));
                         }
                     }
                     else if (comm.Fill.Type == SLA.SLFillType.PatternFill)
@@ -647,7 +648,7 @@ namespace SpreadsheetLight
                                 dictImageData[sImageData] = sRelId;
                             }
                         }
-                        
+
                         sbVml.AppendFormat(" o:relid=\"{0}\"", comm.Fill.BlipRelationshipID);
 
                         sbVml.AppendFormat(" o:title=\"{0}\"", SLA.SLDrawingTool.ConvertToVmlTitle(comm.Fill.PatternPreset));
@@ -665,23 +666,26 @@ namespace SpreadsheetLight
                     {
                         sbVml.Append("<v:stroke");
 
-                        switch (comm.LineStyle)
+
+                        if (comm.LineStyle == StrokeLineStyleValues.Single)
                         {
-                            case StrokeLineStyleValues.Single:
-                                // don't have to do anything
-                                break;
-                            case StrokeLineStyleValues.ThickBetweenThin:
-                                sbVml.Append(" linestyle=\"thickBetweenThin\"/>");
-                                break;
-                            case StrokeLineStyleValues.ThickThin:
-                                sbVml.Append(" linestyle=\"thickThin\"/>");
-                                break;
-                            case StrokeLineStyleValues.ThinThick:
-                                sbVml.Append(" linestyle=\"thinThick\"/>");
-                                break;
-                            case StrokeLineStyleValues.ThinThin:
-                                sbVml.Append(" linestyle=\"thinThin\"/>");
-                                break;
+                            // don't have to do anything
+                        }
+                        else if (comm.LineStyle == StrokeLineStyleValues.ThickBetweenThin)
+                        {
+                            sbVml.Append(" linestyle=\"thickBetweenThin\"/>");
+                        }
+                        else if (comm.LineStyle == StrokeLineStyleValues.ThickThin)
+                        {
+                            sbVml.Append(" linestyle=\"thickThin\"/>");
+                        }
+                        else if (comm.LineStyle == StrokeLineStyleValues.ThinThick)
+                        {
+                            sbVml.Append(" linestyle=\"thinThick\"/>");
+                        }
+                        else if (comm.LineStyle == StrokeLineStyleValues.ThickThin)
+                        {
+                            sbVml.Append(" linestyle=\"thinThin\"/>");
                         }
 
                         if (comm.vLineDashStyle != null)
@@ -726,17 +730,18 @@ namespace SpreadsheetLight
 
                         if (comm.vEndCap != null)
                         {
-                            switch (comm.vEndCap.Value)
+
+                            if (comm.vEndCap.Value == StrokeEndCapValues.Flat)
                             {
-                                case StrokeEndCapValues.Flat:
-                                    sbVml.Append(" endcap=\"flat\"/>");
-                                    break;
-                                case StrokeEndCapValues.Round:
-                                    sbVml.Append(" endcap=\"round\"/>");
-                                    break;
-                                case StrokeEndCapValues.Square:
-                                    sbVml.Append(" endcap=\"square\"/>");
-                                    break;
+                                sbVml.Append(" endcap=\"flat\"/>");
+                            }
+                            else if (comm.vEndCap.Value == StrokeEndCapValues.Round)
+                            {
+                                sbVml.Append(" endcap=\"round\"/>");
+                            }
+                            else if (comm.vEndCap.Value == StrokeEndCapValues.Square)
+                            {
+                                sbVml.Append(" endcap=\"square\"/>");
                             }
                         }
 
@@ -821,7 +826,7 @@ namespace SpreadsheetLight
                     //sbVml.Append("2, 15, 2, 14, 4, 23, 6, 19");
                     //sbVml.Append("</x:Anchor>");
                     sbVml.Append("<x:AutoFill>False</x:AutoFill>");
-                    
+
                     switch (comm.HorizontalTextAlignment)
                     {
                         case SLHorizontalTextAlignmentValues.Left:

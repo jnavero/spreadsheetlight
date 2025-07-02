@@ -777,7 +777,7 @@ namespace SpreadsheetLight
             WorksheetPart wsp = (WorksheetPart)wbp.GetPartById(gsSelectedWorksheetRelationshipID);
 
             slws = new SLWorksheet(SimpleTheme.listThemeColors, SimpleTheme.listIndexedColors, SimpleTheme.ThemeColumnWidth, SimpleTheme.ThemeColumnWidthInEMU, SimpleTheme.ThemeMaxDigitWidth, SimpleTheme.listColumnStepSize, SimpleTheme.ThemeRowHeight);
-            
+
             int index = 0;
             SLColumnProperties cp;
             Column col;
@@ -2665,26 +2665,29 @@ namespace SpreadsheetLight
                             }
 
                             // number type is default
-                            switch (c.DataType)
+                            if (c.DataType == CellValues.Boolean)
                             {
-                                case CellValues.Boolean:
-                                    oxa.Add(new OpenXmlAttribute("t", null, "b"));
-                                    break;
-                                case CellValues.Date:
-                                    oxa.Add(new OpenXmlAttribute("t", null, "d"));
-                                    break;
-                                case CellValues.Error:
-                                    oxa.Add(new OpenXmlAttribute("t", null, "e"));
-                                    break;
-                                case CellValues.InlineString:
-                                    oxa.Add(new OpenXmlAttribute("t", null, "inlineStr"));
-                                    break;
-                                case CellValues.SharedString:
-                                    oxa.Add(new OpenXmlAttribute("t", null, "s"));
-                                    break;
-                                case CellValues.String:
-                                    oxa.Add(new OpenXmlAttribute("t", null, "str"));
-                                    break;
+                                oxa.Add(new OpenXmlAttribute("t", null, "b"));
+                            }
+                            else if (c.DataType == CellValues.Date)
+                            {
+                                oxa.Add(new OpenXmlAttribute("t", null, "d"));
+                            }
+                            else if (c.DataType == CellValues.Error)
+                            {
+                                oxa.Add(new OpenXmlAttribute("t", null, "e"));
+                            }
+                            else if (c.DataType == CellValues.InlineString)
+                            {
+                                oxa.Add(new OpenXmlAttribute("t", null, "inlineStr"));
+                            }
+                            else if (c.DataType == CellValues.SharedString)
+                            {
+                                oxa.Add(new OpenXmlAttribute("t", null, "s"));
+                            }
+                            else if (c.DataType == CellValues.String)
+                            {
+                                oxa.Add(new OpenXmlAttribute("t", null, "str"));
                             }
 
                             if (c.CellMetaIndex > 0)
@@ -3257,7 +3260,7 @@ namespace SpreadsheetLight
             {
                 xw.WriteStartDocument(true);
                 xw.WriteStartElement("cp", "coreProperties", "http://schemas.openxmlformats.org/package/2006/metadata/core-properties");
-                
+
                 xw.WriteAttributeString("xmlns", "dc", null, "http://purl.org/dc/elements/1.1/");
                 xw.WriteAttributeString("xmlns", "dcmitype", null, "http://purl.org/dc/dcmitype/");
                 xw.WriteAttributeString("xmlns", "dcterms", null, "http://purl.org/dc/terms/");
@@ -3524,7 +3527,7 @@ namespace SpreadsheetLight
 
             WriteWorkbook();
             WriteDocumentProperties();
-            
+
             //xl.Close();
             xl.Dispose();
 
@@ -3802,7 +3805,7 @@ namespace SpreadsheetLight
             WorksheetPart wsp = (WorksheetPart)wbp.GetPartById(gsSelectedWorksheetRelationshipID);
             var errorsParts = wsp.Worksheet.FirstOrDefault(x => x.GetType().IsAssignableFrom(typeof(IgnoredErrors)));
 
-            var range = SLConvert.ToCellRange(StartRowIndex, StartColumnIndex, EndRowIndex, EndColumnIndex);  
+            var range = SLConvert.ToCellRange(StartRowIndex, StartColumnIndex, EndRowIndex, EndColumnIndex);
 
             if (errorsParts == null)
             {

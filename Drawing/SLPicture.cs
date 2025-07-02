@@ -16,7 +16,7 @@ namespace SpreadsheetLight.Drawing
         internal bool DataIsInFile;
         internal string PictureFileName;
         internal byte[] PictureByteData;
-        internal ImagePartType PictureImagePartType = ImagePartType.Bmp;
+        internal PartTypeInfo PictureImagePartType = ImagePartType.Bmp;
 
         internal double TopPosition;
         internal double LeftPosition;
@@ -279,13 +279,13 @@ namespace SpreadsheetLight.Drawing
         /// </summary>
         /// <param name="PictureByteData">The picture's data in a byte array.</param>
         /// <param name="PictureType">The image type of the picture.</param>
-        public SLPicture(byte[] PictureByteData, ImagePartType PictureType)
+        public SLPicture(byte[] PictureByteData, PartTypeInfo PictureTypeInfo)
         {
             InitialisePicture(false);
 
             DataIsInFile = false;
             this.PictureByteData = PictureByteData;
-            this.PictureImagePartType = PictureType;
+            this.PictureImagePartType = PictureTypeInfo;
 
             SetResolution(false, 96, 96);
         }
@@ -296,7 +296,7 @@ namespace SpreadsheetLight.Drawing
         /// <param name="PictureByteData">The picture's data in a byte array.</param>
         /// <param name="PictureType">The image type of the picture.</param>
         /// <param name="ThrowExceptionsIfAny">Set to true to bubble exceptions up if there are any occurring within SpreadsheetLight. Set to false otherwise. The default is false.</param>
-        public SLPicture(byte[] PictureByteData, ImagePartType PictureType, bool ThrowExceptionsIfAny)
+        public SLPicture(byte[] PictureByteData, PartTypeInfo PictureType, bool ThrowExceptionsIfAny)
         {
             InitialisePicture(ThrowExceptionsIfAny);
 
@@ -314,7 +314,7 @@ namespace SpreadsheetLight.Drawing
         /// <param name="PictureType">The image type of the picture.</param>
         /// <param name="TargetHorizontalResolution">The targeted computer's horizontal resolution (DPI).</param>
         /// <param name="TargetVerticalResolution">The targeted computer's vertical resolution (DPI).</param>
-        public SLPicture(byte[] PictureByteData, ImagePartType PictureType, float TargetHorizontalResolution, float TargetVerticalResolution)
+        public SLPicture(byte[] PictureByteData, PartTypeInfo PictureType, float TargetHorizontalResolution, float TargetVerticalResolution)
         {
             InitialisePicture(false);
 
@@ -337,7 +337,7 @@ namespace SpreadsheetLight.Drawing
         /// <param name="TargetHorizontalResolution">The targeted computer's horizontal resolution (DPI).</param>
         /// <param name="TargetVerticalResolution">The targeted computer's vertical resolution (DPI).</param>
         /// <param name="ThrowExceptionsIfAny">Set to true to bubble exceptions up if there are any occurring within SpreadsheetLight. Set to false otherwise. The default is false.</param>
-        public SLPicture(byte[] PictureByteData, ImagePartType PictureType, float TargetHorizontalResolution, float TargetVerticalResolution, bool ThrowExceptionsIfAny)
+        public SLPicture(byte[] PictureByteData, PartTypeInfo PictureType, float TargetHorizontalResolution, float TargetVerticalResolution, bool ThrowExceptionsIfAny)
         {
             InitialisePicture(ThrowExceptionsIfAny);
 

@@ -13,7 +13,7 @@ namespace SpreadsheetLight
         /// This is purely for setting (not getting). If not A1, then we'll do stuff.
         /// </summary>
         internal SLCellPoint ActiveCell { get; set; }
-        
+
         internal List<SLSheetView> SheetViews { get; set; }
 
         internal bool IsDoubleColumnWidth { get; set; }
@@ -77,7 +77,7 @@ namespace SpreadsheetLight
         internal bool? BackgroundPictureDataIsInFile { get; set; }
         internal string BackgroundPictureFileName { get; set; }
         internal byte[] BackgroundPictureByteData { get; set; }
-        internal ImagePartType BackgroundPictureImagePartType { get; set; }
+        internal PartTypeInfo BackgroundPictureImagePartType { get; set; }
 
         // for cell comments
         internal string LegacyDrawingId { get; set; }

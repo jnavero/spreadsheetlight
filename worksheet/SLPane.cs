@@ -63,20 +63,22 @@ namespace SpreadsheetLight
         internal static string GetPaneValuesAttribute(PaneValues pv)
         {
             string result = "topLeft";
-            switch (pv)
+
+            if (pv == PaneValues.BottomLeft)
             {
-                case PaneValues.BottomLeft:
-                    result = "bottomLeft";
-                    break;
-                case PaneValues.BottomRight:
-                    result = "bottomRight";
-                    break;
-                case PaneValues.TopLeft:
-                    result = "topLeft";
-                    break;
-                case PaneValues.TopRight:
-                    result = "topRight";
-                    break;
+                result = "bottomLeft";
+            }
+            else if (pv == PaneValues.BottomRight)
+            {
+                result = "bottomRight";
+            }
+            else if (pv == PaneValues.TopLeft)
+            {
+                result = "topLeft";
+            }
+            else if (pv == PaneValues.TopRight)
+            {
+                result = "topRight";
             }
 
             return result;
@@ -85,17 +87,18 @@ namespace SpreadsheetLight
         internal static string GetPaneStateValuesAttribute(PaneStateValues psv)
         {
             string result = "split";
-            switch (psv)
+
+            if (psv == PaneStateValues.Frozen)
             {
-                case PaneStateValues.Frozen:
-                    result = "frozen";
-                    break;
-                case PaneStateValues.FrozenSplit:
-                    result = "frozenSplit";
-                    break;
-                case PaneStateValues.Split:
-                    result = "split";
-                    break;
+                result = "frozen";
+            }
+            else if (psv == PaneStateValues.FrozenSplit)
+            {
+                result = "frozenSplit";
+            }
+            else if (psv == PaneStateValues.Split)
+            {
+                result = "split";
             }
 
             return result;

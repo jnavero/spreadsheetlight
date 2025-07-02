@@ -511,39 +511,35 @@ namespace SpreadsheetLight.Drawing
 
         private bool IsPerspectiveView(A.PresetCameraValues Preset)
         {
-            bool result = false;
-
-            switch (Preset)
+            if (Preset == A.PresetCameraValues.LegacyPerspectiveBottom ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveBottomLeft ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveBottomRight ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveFront ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveLeft ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveRight ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveTop ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveTopLeft ||
+                Preset == A.PresetCameraValues.LegacyPerspectiveTopRight ||
+                Preset == A.PresetCameraValues.PerspectiveAbove ||
+                Preset == A.PresetCameraValues.PerspectiveAboveLeftFacing ||
+                Preset == A.PresetCameraValues.PerspectiveAboveRightFacing ||
+                Preset == A.PresetCameraValues.PerspectiveBelow ||
+                Preset == A.PresetCameraValues.PerspectiveContrastingLeftFacing ||
+                Preset == A.PresetCameraValues.PerspectiveContrastingRightFacing ||
+                Preset == A.PresetCameraValues.PerspectiveFront ||
+                Preset == A.PresetCameraValues.PerspectiveHeroicExtremeLeftFacing ||
+                Preset == A.PresetCameraValues.PerspectiveHeroicExtremeRightFacing ||
+                Preset == A.PresetCameraValues.PerspectiveHeroicLeftFacing ||
+                Preset == A.PresetCameraValues.PerspectiveHeroicRightFacing ||
+                Preset == A.PresetCameraValues.PerspectiveLeft ||
+                Preset == A.PresetCameraValues.PerspectiveRelaxed ||
+                Preset == A.PresetCameraValues.PerspectiveRelaxedModerately ||
+                Preset == A.PresetCameraValues.PerspectiveRight)
             {
-                case A.PresetCameraValues.LegacyPerspectiveBottom:
-                case A.PresetCameraValues.LegacyPerspectiveBottomLeft:
-                case A.PresetCameraValues.LegacyPerspectiveBottomRight:
-                case A.PresetCameraValues.LegacyPerspectiveFront:
-                case A.PresetCameraValues.LegacyPerspectiveLeft:
-                case A.PresetCameraValues.LegacyPerspectiveRight:
-                case A.PresetCameraValues.LegacyPerspectiveTop:
-                case A.PresetCameraValues.LegacyPerspectiveTopLeft:
-                case A.PresetCameraValues.LegacyPerspectiveTopRight:
-                case A.PresetCameraValues.PerspectiveAbove:
-                case A.PresetCameraValues.PerspectiveAboveLeftFacing:
-                case A.PresetCameraValues.PerspectiveAboveRightFacing:
-                case A.PresetCameraValues.PerspectiveBelow:
-                case A.PresetCameraValues.PerspectiveContrastingLeftFacing:
-                case A.PresetCameraValues.PerspectiveContrastingRightFacing:
-                case A.PresetCameraValues.PerspectiveFront:
-                case A.PresetCameraValues.PerspectiveHeroicExtremeLeftFacing:
-                case A.PresetCameraValues.PerspectiveHeroicExtremeRightFacing:
-                case A.PresetCameraValues.PerspectiveHeroicLeftFacing:
-                case A.PresetCameraValues.PerspectiveHeroicRightFacing:
-                case A.PresetCameraValues.PerspectiveLeft:
-                case A.PresetCameraValues.PerspectiveRelaxed:
-                case A.PresetCameraValues.PerspectiveRelaxedModerately:
-                case A.PresetCameraValues.PerspectiveRight:
-                    result = true;
-                    break;
+                return true;
             }
 
-            return result;
+            return false;
         }
 
         internal SLRotation3D Clone()

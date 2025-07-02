@@ -1226,7 +1226,7 @@ namespace SpreadsheetLight
                 }
             }
         }
-        
+
         internal void FeedDataDiagramDataPart(DiagramDataPart NewPart, DiagramDataPart ExistingPart)
         {
             using (StreamReader sr = new StreamReader(ExistingPart.GetStream()))
@@ -1902,7 +1902,7 @@ namespace SpreadsheetLight
         /// </summary>
         /// <param name="PictureByteData">The picture's data in a byte array.</param>
         /// <param name="PictureType">The image type of the picture.</param>
-        public void AddBackgroundPicture(byte[] PictureByteData, ImagePartType PictureType)
+        public void AddBackgroundPicture(byte[] PictureByteData, PartTypeInfo PictureType)
         {
             // delete any background picture first
             this.DeleteBackgroundPicture();

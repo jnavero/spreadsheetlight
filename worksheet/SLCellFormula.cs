@@ -144,20 +144,22 @@ namespace SpreadsheetLight
         internal static string GetFormulaTypeAttribute(CellFormulaValues cfv)
         {
             string result = "normal";
-            switch (cfv)
+
+            if (cfv == CellFormulaValues.Normal)
             {
-                case CellFormulaValues.Normal:
-                    result = "normal";
-                    break;
-                case CellFormulaValues.Array:
-                    result = "array";
-                    break;
-                case CellFormulaValues.DataTable:
-                    result = "dataTable";
-                    break;
-                case CellFormulaValues.Shared:
-                    result = "shared";
-                    break;
+                result = "normal";
+            }
+            if (cfv == CellFormulaValues.Array)
+            {
+                result = "array";
+            }
+            if (cfv == CellFormulaValues.DataTable)
+            {
+                result = "dataTable";
+            }
+            if (cfv == CellFormulaValues.Shared)
+            {
+                result = "shared";
             }
 
             return result;
